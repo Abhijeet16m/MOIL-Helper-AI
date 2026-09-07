@@ -7,14 +7,14 @@ import joblib
 # 1. Load CSV
 # --------------------------------
 
-df = pd.read_csv("training_data_complete.csv")
+df = pd.read_csv("assets/datasets/training_data_complete.csv")
 
 
 # --------------------------------
 # 2. Load trained model
 # --------------------------------
 
-model = joblib.load("manganese_decision_tree.joblib")
+model = joblib.load("Models/manganese_decision_tree.joblib")
 
 
 # --------------------------------
