@@ -14,19 +14,21 @@ df = pd.read_csv("assets/datasets/training_data_complete.csv")
 # 2. Load trained model
 # --------------------------------
 
-model = joblib.load("Models/manganese_decision_tree.joblib")
+model = joblib.load("Models/XGB_manganese_decision_tree.joblib")
 
 
 # --------------------------------
 # 3. Prepare input data
 # --------------------------------
 
-X = df.drop("LABEL", axis=1)
+X = df.drop(["LABEL", "REGION_FLAG"], axis=1)
 
 actual = df["LABEL"]
 
 # Predict all 212 rows
 predicted = model.predict(X)
+percentage = model.predict_proba(X)[:,1] * 100
+
 
 
 # --------------------------------
@@ -39,7 +41,8 @@ results = pd.DataFrame({
     "LON": df["LONDD"],
     "Actual": actual,
     "Predicted": predicted,
-    "Correct": actual.to_numpy() == predicted
+    "Correct": actual.to_numpy() == predicted,
+    "Percent": percentage
 })
 
 
